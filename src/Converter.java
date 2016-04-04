@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -17,7 +18,8 @@ public class Converter {
 		BufferedReader br = null;
 		String sCurrentLine,lat,lon;
 		JSONArray arrtop = new JSONArray();
-		br = new BufferedReader(new FileReader("C:\\Users\\Mobilewalla\\workspace\\CSVtoJSON\\src\\input.txt"));
+		URL url = Converter.class.getResource("input.txt");
+		br = new BufferedReader(new FileReader(url.getPath()));
 		while ((sCurrentLine = br.readLine()) != null) {
 			String[] st = sCurrentLine.split(" ");
 			JSONArray arrbottom = new JSONArray();
@@ -40,7 +42,7 @@ public class Converter {
 			arrtop.add(jsongeofilters);
 		}
 		br.close();
-		PrintWriter writer = new PrintWriter("C:\\Users\\Mobilewalla\\workspace\\CSVtoJSON\\src\\output.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter("output.txt", "UTF-8");
 		writer.print(arrtop.toJSONString());
 		writer.close();
 		
